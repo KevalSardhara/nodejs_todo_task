@@ -12,7 +12,7 @@ export const errorMiddleware = async (err, req, res, next) => {
 
     err.message = err.message || "Internal Server Error";
 
-    return await res.status(404).json({
+    return res.status(404).json({
         success: false,
         message: err.message // error messages sysntex here
     });

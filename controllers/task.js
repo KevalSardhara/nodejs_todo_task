@@ -13,9 +13,9 @@ export const postNewTask = async (req, res, next) => {
             message: "Task added Successfully",
         });
     } catch (error) {
-        // return await next(new ErrorHandler(error, 404));
+        // return next(new ErrorHandler(error, 404));
         console.log("error ------> ", error);
-        return await next(error);
+        return next(error);
     }
 };
 export const getMyTask = async (req, res, next) => {
@@ -26,7 +26,7 @@ export const getMyTask = async (req, res, next) => {
         const task = await Task.find({ user: userId });
     
         if (!task) {
-            return await next(new ErrorHandler("Task Not Exist", 404));
+            return next(new ErrorHandler("Task Not Exist", 404));
         }
     
         res.status(200).json({
@@ -35,7 +35,7 @@ export const getMyTask = async (req, res, next) => {
             task
         });
     } catch (error) {
-        return await next(error);
+        return next(error);
     }
 };
 export const updateTask = async (req, res, next) => {
@@ -44,7 +44,7 @@ export const updateTask = async (req, res, next) => {
     
         const task = await Task.findById(id);
         if (!task) {
-            return await next(new ErrorHandler("Task Not Exist Please Create First", 404));
+            return next(new ErrorHandler("Task Not Exist Please Create First", 404));
         }
         console.log(task);
     
@@ -57,7 +57,7 @@ export const updateTask = async (req, res, next) => {
         });
         
     } catch (error) {
-        return await next(error);
+        return next(error);
     }
 };
 export const deleteTask = async (req, res, next) => {
@@ -66,7 +66,7 @@ export const deleteTask = async (req, res, next) => {
         console.log(task, "---");
     
         if (!task) {
-            return await next(new ErrorHandler("Task Not Exist", 404));
+            return next(new ErrorHandler("Task Not Exist", 404));
         }
     
         await task.deleteOne();
@@ -77,7 +77,7 @@ export const deleteTask = async (req, res, next) => {
             task
         });
     } catch (error) {
-        
+        return next(error);
     }
 };
 

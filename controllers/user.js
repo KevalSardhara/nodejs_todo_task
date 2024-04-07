@@ -17,12 +17,12 @@ export const postUserRegister = async (req, res, next) => {
 
         let user = await User.findOne({ email });
         if (user) {
-            return await res.status(404).json({
+            return res.status(404).json({
                 success: false,
                 message: "User Already Exist"
             });
             // or //
-            // return await next(new Error("User Already Exist"));
+            // return next(new Error("User Already Exist"));
         } else {
             const hasPassword = await bcrypt.hash(password, 10);
             user = await User.create({ name, email, password: hasPassword });
@@ -31,7 +31,7 @@ export const postUserRegister = async (req, res, next) => {
             sendCookie(user, res, message, 201);
         }
     } catch (error) {
-        return await next(error);
+        return next(error);
     }
 
 };
@@ -50,7 +50,7 @@ export const postUserLogin = async (req, res, next) => {
         console.log(user);
 
         if (!user) {
-            return await res.status(404).json({
+            return res.status(404).json({
                 success: false,
                 message: "Invalide Email or Password"
             });
@@ -58,14 +58,14 @@ export const postUserLogin = async (req, res, next) => {
             // or //
 
             // if (!task) {
-            //     return await next(new ErrorHandler("Invalide Email or Password", 404));
+            //     return next(new ErrorHandler("Invalide Email or Password", 404));
             // }
 
         } else {
             const isMatch = await bcrypt.compare(password, user.password);
 
             if (!isMatch) {
-                return await res.status(404).json({
+                return res.status(404).json({
                     success: false,
                     message: "Invalide Email or Password"
                 });
@@ -75,7 +75,7 @@ export const postUserLogin = async (req, res, next) => {
         }
 
     } catch (error) {
-        return await next(error);
+        return next(error);
     }
 };
 
@@ -88,7 +88,7 @@ export const getUserData = async (req, res, next) => {
         })
         
     } catch (error) {
-        return await next(error);
+        return next(error);
     }
 };
 
@@ -103,7 +103,7 @@ export const getUserLogout = async (req, res, next) => {
             message: "Logout Successfully",
         })
     } catch (error) {
-        return await next(error);
+        return next(error);
     }
 };
 
