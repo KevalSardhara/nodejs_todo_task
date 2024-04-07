@@ -8,8 +8,8 @@ export const connectDB = () => {
 
     mongoose.connect(URL, {
         dbName,
-    }).then(() => {
-        console.log("serevr start here");
+    }).then((connect) => {
+        console.log(`database connected successfully -> ${connect.connection.host}`);
     }).catch((e) => {
         console.log("error", e);
     });
