@@ -9,7 +9,7 @@ export const connectDB = () => {
     mongoose.connect(URL, {
         dbName,
     }).then((connect) => {
-        console.log(`database connected successfully -> ${connect.connection.host}`);
+        console.log(`database connected successfully -> ${connect.connection.host}`); 
     }).catch((e) => {
         console.log("error", e);
     });

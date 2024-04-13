@@ -9,7 +9,7 @@ export const isAuthenticated = async (req, res, next) => {
     console.log(token);
 
     if (!token) {
-        return res.status(200).json({
+        return res.status(404).json({
             success: false,
             user: "Login First",
         })
